@@ -81,7 +81,7 @@ struct DocumentField: Decodable {
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        self.digestID = 0
+        self.digestID = try container.decode(Int.self, forKey: .digestID)
         self.random = try container.decode(Data.self, forKey: .random)
         self.elementIdentifier = try container.decode(String.self, forKey: .elementIdentifier)
         self.elementValue = try container.decode(ElementValue.self, forKey: .elementValue)
@@ -94,6 +94,7 @@ enum ElementValue: Decodable {
     case date(Int, Date)
     case float(Float)
     case data(Data)
+    case dict([DrivingPrivilege])
 
     init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
@@ -107,12 +108,26 @@ enum ElementValue: Decodable {
             self = .float(floatValue)
         } else if let dataValue = try? container.decode(Data.self) {
             self = .data(dataValue)
+        } else if let dictValue = try? container.decode([DrivingPrivilege].self){
+            self = .dict(dictValue)
         } else {
             throw DecodingError.dataCorrupted(
                 DecodingError.Context(codingPath: decoder.codingPath,
                                       debugDescription: "Unable to decode firstName")
             )
         }
+    }
+}
+
+struct DrivingPrivilege: Decodable {
+    let vehicleCategoryCode: String
+    let issueDate: String
+    let expiryDate: String
+    
+    enum CodingKeys: String, CodingKey {
+        case vehicleCategoryCode = "vehicle_category_code"
+        case issueDate = "issue_date"
+        case expiryDate = "expiry_date"
     }
 }
 
