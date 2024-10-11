@@ -184,7 +184,7 @@ internal class CBORParser {
                         case .fullDateString:
                             let string = try decode(String.self, from: data[index...])
                             try storage.append(string.value)
-                            break
+                            index += string.decodedBytes
                         case .selfDescribedCBOR:
                             break // skip the tag and continue
                         }
