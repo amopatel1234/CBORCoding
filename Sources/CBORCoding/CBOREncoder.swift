@@ -427,7 +427,12 @@ open class CBOREncoder {
             } else {
                 try CBOR.preconditionFailure("Expected to encode string for tag: \(tag.bits.map({ String(format: "%02X", $0) }))")
             }
-
+        case .fullDateString:
+            if let string = value as? String {
+                result = tag.bits + encode(string)
+            } else {
+                try CBOR.preconditionFailure("Expected to encode data for tag: \(tag.bits.map({ String(format: "%02X", $0) }))")
+            }
         case .regularExpression:
             if let regex = value as? NSRegularExpression {
                 result = tag.bits + encode(regex.pattern)
