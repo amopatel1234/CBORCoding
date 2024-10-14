@@ -32,6 +32,9 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		3B359F4F2CB9335000FB5DB4 /* MdlResponseFromSpec in Resources */ = {isa = PBXBuildFile; fileRef = 3B359F4D2CB9335000FB5DB4 /* MdlResponseFromSpec */; };
+		3B359F502CB9335000FB5DB4 /* MDocModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B359F4E2CB9335000FB5DB4 /* MDocModel.swift */; };
+		3B359F522CB9336700FB5DB4 /* MDLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B359F512CB9335C00FB5DB4 /* MDLTests.swift */; };
 		8EBD20582B03BA9900036789 /* Half.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EBD20572B03BA9900036789 /* Half.framework */; };
 		8EBD20592B03BA9900036789 /* Half.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8EBD20572B03BA9900036789 /* Half.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8EBD205C2B03BAA400036789 /* Half.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EBD205B2B03BAA400036789 /* Half.framework */; };
@@ -205,6 +208,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3B359F4D2CB9335000FB5DB4 /* MdlResponseFromSpec */ = {isa = PBXFileReference; lastKnownFileType = text; path = MdlResponseFromSpec; sourceTree = "<group>"; };
+		3B359F4E2CB9335000FB5DB4 /* MDocModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDocModel.swift; sourceTree = "<group>"; };
+		3B359F512CB9335C00FB5DB4 /* MDLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDLTests.swift; sourceTree = "<group>"; };
 		8EBD20572B03BA9900036789 /* Half.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Half.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EBD205B2B03BAA400036789 /* Half.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Half.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EBD205F2B03BAA900036789 /* Half.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Half.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -315,6 +321,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3B359F4C2CB932FE00FB5DB4 /* mDL */ = {
+			isa = PBXGroup;
+			children = (
+				3B359F512CB9335C00FB5DB4 /* MDLTests.swift */,
+				3B359F4D2CB9335000FB5DB4 /* MdlResponseFromSpec */,
+				3B359F4E2CB9335000FB5DB4 /* MDocModel.swift */,
+			);
+			path = mDL;
+			sourceTree = "<group>";
+		};
 		DD02B7FB27476A21007F5569 /* CBOR */ = {
 			isa = PBXGroup;
 			children = (
@@ -459,6 +475,7 @@
 		DDB1DE502405EE9900C20FED /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				3B359F4C2CB932FE00FB5DB4 /* mDL */,
 				DD5D04F22621362400BA0FC2 /* CBORCodingTests */,
 				DD48BC9E270E0F1300D842BC /* Test Plans */,
 			);
@@ -760,6 +777,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B359F4F2CB9335000FB5DB4 /* MdlResponseFromSpec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -836,7 +854,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif (echo \"$SKIP_SWIFTLINT\" | grep -iq \"^YES$\"); then\n    echo \"SKIP_SWIFTLINT=YES | Skipping SwiftLint\"\nelse\n    if which swiftlint >/dev/null; then\n        swiftlint\n    else\n        echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n    fi\nfi\n";
+			shellScript = "#
+";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -874,7 +893,9 @@
 			files = (
 				DD02B7F727476A14007F5569 /* CBORTests.swift in Sources */,
 				DD02B7E727476A13007F5569 /* CBORDecoderTests.swift in Sources */,
+				3B359F502CB9335000FB5DB4 /* MDocModel.swift in Sources */,
 				DD02B7EB27476A13007F5569 /* ContainersTests.swift in Sources */,
+				3B359F522CB9336700FB5DB4 /* MDLTests.swift in Sources */,
 				DD02B7F327476A13007F5569 /* CBORParserTests.swift in Sources */,
 				DD02B7EF27476A13007F5569 /* CBOREncoderTests.swift in Sources */,
 			);

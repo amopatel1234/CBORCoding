@@ -493,6 +493,7 @@ extension CBOR {
         case base64
         case regularExpression
         case mimeMessage
+        case fullDateString
         case selfDescribedCBOR
 
         // MARK: Initialization
@@ -530,6 +531,7 @@ extension CBOR {
 
                 switch (bits[bits.index(bits.startIndex, offsetBy: 1)], bits[bits.index(bits.startIndex, offsetBy: 2)]) {
                 case (0xD9, 0xF7): self = .selfDescribedCBOR
+                case (0x03, 0xEC): self = .fullDateString
                 default:           return nil
                 }
 
@@ -557,6 +559,7 @@ extension CBOR {
             case .base64:              return Data([MajorType.tag.rawValue | 24, 34])
             case .regularExpression:   return Data([MajorType.tag.rawValue | 24, 35])
             case .mimeMessage:         return Data([MajorType.tag.rawValue | 24, 36])
+            case .fullDateString:      return Data([MajorType.tag.rawValue | 25, 0xEC, 0x03])
             case .selfDescribedCBOR:   return Data([MajorType.tag.rawValue | 25, 0xD9, 0xF7]) // tag | 55799
             }
         }
@@ -580,6 +583,7 @@ extension CBOR {
             case .base64:              return "Base64 (\(bits.map({ String(format: "%02X", $0) }).joined()))"
             case .regularExpression:   return "Regular Expression (\(bits.map({ String(format: "%02X", $0) }).joined()))"
             case .mimeMessage:         return "MIME Message (\(bits.map({ String(format: "%02X", $0) }).joined()))"
+            case .fullDateString:      return "Full Date String (\(bits.map({ String(format: "%02X", $0) }).joined()))"
             case .selfDescribedCBOR:   return "Self-Described CBOR (\(bits.map({ String(format: "%02X", $0) }).joined()))"
             }
         }
