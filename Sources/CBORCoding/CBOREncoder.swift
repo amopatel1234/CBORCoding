@@ -303,6 +303,10 @@ open class CBOREncoder {
         return CBOR.CBOREncoded(encodedData: result)
     }
 
+    public func encodeCBORObject(object: Data) throws -> Data {
+        return try CBOREncoder.encode(object, forTag: .encodedCBORData).encodedData
+    }
+    
     // swiftlint:disable function_body_length
     internal static func encode(_ value: Any, forTag tag: CBOR.Tag) throws -> CBOR.CBOREncoded {
         var result = Data()
