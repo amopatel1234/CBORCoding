@@ -559,7 +559,7 @@ extension CBOR {
             case .base64:              return Data([MajorType.tag.rawValue | 24, 34])
             case .regularExpression:   return Data([MajorType.tag.rawValue | 24, 35])
             case .mimeMessage:         return Data([MajorType.tag.rawValue | 24, 36])
-            case .fullDateString:      return Data([MajorType.tag.rawValue | 25, 0xEC, 0x03])
+            case .fullDateString:      return Data([MajorType.tag.rawValue | 25, 0x03, 0xEC])
             case .selfDescribedCBOR:   return Data([MajorType.tag.rawValue | 25, 0xD9, 0xF7]) // tag | 55799
             }
         }
