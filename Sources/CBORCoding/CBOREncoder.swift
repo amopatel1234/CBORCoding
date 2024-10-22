@@ -40,6 +40,8 @@ open class CBOREncoder {
 
         /// The strategy that formats dates in terms of seconds since midnight UTC, January 1, 1970.
         case secondsSince1970
+        
+        case fullDateString
 
         // MARK: Internal Properties
 
@@ -47,6 +49,7 @@ open class CBOREncoder {
             switch self {
             case .rfc3339:          return CBOR.Tag.standardDateTime.bits
             case .secondsSince1970: return CBOR.Tag.epochDateTime.bits
+            case .fullDateString:   return CBOR.Tag.fullDateString.bits
             }
         }
     }
@@ -287,6 +290,10 @@ open class CBOREncoder {
             } else {
                 encodedDate = encode(interval)
             }
+        case .fullDateString:
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            encodedDate = encode(formatter.string(from: value))
         }
 
         return encoding.bits + encodedDate
@@ -305,6 +312,10 @@ open class CBOREncoder {
 
     public func encodeCBORObject(object: Data) throws -> Data {
         return try CBOREncoder.encode(object, forTag: .encodedCBORData).encodedData
+    }
+    
+    public func encode(_ value: Any, forTag tag: CBOR.Tag) throws -> Data {
+        try CBOREncoder.encode(value, forTag: tag).encodedData
     }
     
     // swiftlint:disable function_body_length

@@ -474,7 +474,7 @@ extension CBOR {
      Optional CBOR Tags described by [RFC 8949 Section
      3.4](https://datatracker.ietf.org/doc/html/rfc8949#section-3.4).
      */
-    internal enum Tag: CustomStringConvertible {
+    public enum Tag: CustomStringConvertible {
 
         // MARK: Cases
 
