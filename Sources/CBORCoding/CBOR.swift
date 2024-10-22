@@ -566,7 +566,7 @@ extension CBOR {
 
         // MARK: CustomStringConvertible Protocol Requirements
 
-        var description: String {
+        public var description: String {
             switch self {
             case .standardDateTime:    return "Standard Date/Time String (\(bits.map({ String(format: "%02X", $0) }).joined()))"
             case .epochDateTime:       return "Epoch-based Date/Time (\(bits.map({ String(format: "%02X", $0) }).joined()))"
