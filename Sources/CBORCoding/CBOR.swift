@@ -424,7 +424,7 @@ extension CBOR {
     // MARK: Internal Types
 
     /// `Null` type for encoding
-    public struct Null: Encodable { }
+    internal struct Null: Encodable { }
 
     /// `Break` code for ending indefinite length types. This is only used for
     /// type-mismatch error messages
