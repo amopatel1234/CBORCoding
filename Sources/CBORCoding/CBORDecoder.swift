@@ -1020,7 +1020,7 @@ private struct __CBORUnkeyedDecodingContainer: UnkeyedDecodingContainer {
         defer { decoder.codingPath.removeLast() }
 
         let value = container[currentIndex]
-        guard !(value is CBOR.Null) else {
+        guard !(value is CBOR.Null) || (value is CBOR.Null && isOptionalType(type)) else {
             throw DecodingError.valueNotFound(T.self, DecodingError.Context(codingPath: decoder.codingPath + [CBOR.CodingKey(index: currentIndex)], debugDescription: "Expected \(T.self) but found null instead."))
         }
 
@@ -1039,7 +1039,7 @@ private struct __CBORUnkeyedDecodingContainer: UnkeyedDecodingContainer {
         defer { decoder.codingPath.removeLast() }
 
         let value = container[currentIndex]
-        guard !(value is CBOR.Null) else {
+        guard !(value is CBOR.Null) || (value is CBOR.Null && isOptionalType(type)) else {
             throw DecodingError.valueNotFound(T.self, DecodingError.Context(codingPath: decoder.codingPath + [CBOR.CodingKey(index: currentIndex)], debugDescription: "Expected \(T.self) but found null instead."))
         }
 
@@ -1058,7 +1058,7 @@ private struct __CBORUnkeyedDecodingContainer: UnkeyedDecodingContainer {
         defer { decoder.codingPath.removeLast() }
 
         let value = container[currentIndex]
-        guard !(value is CBOR.Null) else {
+        guard !(value is CBOR.Null) || (value is CBOR.Null && isOptionalType(type)) else {
             throw DecodingError.valueNotFound(T.self, DecodingError.Context(codingPath: decoder.codingPath + [CBOR.CodingKey(index: currentIndex)], debugDescription: "Expected \(T.self) but found null instead."))
         }
 
@@ -1077,7 +1077,7 @@ private struct __CBORUnkeyedDecodingContainer: UnkeyedDecodingContainer {
         defer { decoder.codingPath.removeLast() }
 
         let value = container[currentIndex]
-        guard !(value is CBOR.Null) else {
+        guard !(value is CBOR.Null) || (value is CBOR.Null && isOptionalType(type)) else {
             throw DecodingError.valueNotFound(T.self, DecodingError.Context(codingPath: decoder.codingPath + [CBOR.CodingKey(index: currentIndex)], debugDescription: "Expected \(T.self) but found null instead."))
         }
 
@@ -1085,6 +1085,15 @@ private struct __CBORUnkeyedDecodingContainer: UnkeyedDecodingContainer {
 
         currentIndex += 1
         return decodedValue
+    }
+}
+
+protocol OptionalProtocol {}
+extension Optional: OptionalProtocol {}
+
+extension __CBORUnkeyedDecodingContainer {
+    private func isOptionalType(_ type: Any.Type) -> Bool {
+        return type is OptionalProtocol.Type
     }
 }
 
